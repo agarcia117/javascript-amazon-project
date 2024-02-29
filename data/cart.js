@@ -8,6 +8,15 @@ export let cart = JSON.parse(localStorage.getItem('cart')) || [{
   deliveryOptionId: '2'
 }];
 
+export function getCartTotalQuantity() {
+  let totalQuantity = 0;
+  cart.forEach((cartItem) => {
+    totalQuantity += cartItem.quantity;
+  });
+
+  return totalQuantity;
+}
+
 function saveToStorage(){
   localStorage.setItem('cart', JSON.stringify(cart));
 }
