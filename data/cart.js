@@ -51,3 +51,13 @@ export function updateCartQuantity(){
   });
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
+
+export function updateQuantity(productId, newQuantity){
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId){
+      console.log(newQuantity);
+      cartItem.quantity = newQuantity;
+    }
+  });
+  saveToStorage();
+}
