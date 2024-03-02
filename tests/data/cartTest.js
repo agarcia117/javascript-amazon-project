@@ -105,10 +105,22 @@ describe('test suite: updateDeliveryOption', () => {
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
-  it('update delivery option of item not in the cart', () => {
+  it('do nothing to delivery option of item not in the cart', () => {
     loadFromStorage();
 
     updateDeliveryOption('bruh', '2');
+    expect(cart).toEqual([{
+      productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+      quantity: 1,
+      deliveryOptionId: '1'
+    }]);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+  });
+
+  it('do nothing to deliveryOptionId to something that doesnt exist ', () => {
+    loadFromStorage();
+
+    updateDeliveryOption('e43638ce-6aa0-4b85-b27f-e1d07eb678c6', '4');
     expect(cart).toEqual([{
       productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
       quantity: 1,
