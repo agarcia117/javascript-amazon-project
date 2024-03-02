@@ -63,9 +63,18 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 updateCartQuantity();
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  let timeout;
   button.addEventListener('click', () => {
+    clearTimeout(timeout);
     const {productId} = button.dataset;
     addToCart(productId);
+    const addedElement = document.querySelector(`.js-added-to-cart-${productId}`);
+    addedElement.classList.add('is-visible');
+
+    timeout = setTimeout(() => {
+      addedElement.classList.remove('is-visible');
+    }, 2000);
+
     updateCartQuantity();
   });
 });
