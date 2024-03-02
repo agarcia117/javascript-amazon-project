@@ -1,6 +1,7 @@
 import { getDeliveryOption } from "./deliveryOptions.js";
 
 export let cart;
+let timeout;
 
 loadFromStorage();
 
@@ -31,8 +32,16 @@ function saveToStorage(){
 
 
 export function addToCart(productId){
+  clearTimeout(timeout);
   let matchingItem;
   let quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+  const addedElement = document.querySelector(`.js-added-to-cart-${productId}`);
+  addedElement.classList.add('is-visible');
+
+  timeout = setTimeout(() => {
+    addedElement.classList.remove('is-visible');
+  }, 2000);
+
   cart.forEach((cartItem) => {
     if(productId === cartItem.productId){
       matchingItem = cartItem;
